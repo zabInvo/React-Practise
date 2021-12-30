@@ -1,18 +1,20 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function NavBar(props) {
   const list = props.data;
   return (
     <Navbar bg="dark" variant="dark" className="d-flex">
       <Container>
-        <Navbar.Brand href="#home">{props.brand}</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/">{props.brand} </Link>
+        </Navbar.Brand>
         <Nav className="me-auto">
           {list.map((value) => {
             return (
-              <Nav.Link href={value} key={value}>
-                {" "}
-                {value}{" "}
+              <Nav.Link to={"/" + value} key={value} as={Link}>
+                {value}
               </Nav.Link>
             );
           })}

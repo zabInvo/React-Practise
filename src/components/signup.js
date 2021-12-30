@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Badge } from "react-bootstrap";
 
 class Signup extends Component {
   constructor() {
+    console.log("Constructor lifecycle");
     super();
     this.state = {
       name: "",
@@ -11,7 +12,29 @@ class Signup extends Component {
       password: "",
     };
   }
+  // CALLS WHEN DOM IS READY
+  componentDidMount() {
+    console.log("componentDidMount lifecycle");
+  }
+  // CALLS WHEN UPDATE ANY STATE AND DOM RE-RENDER
+  componentDidUpdate(preProp, preState, snapshot) {
+    console.log("componentDidUpdate lifecycle");
+    console.log("These are previous props", preProp);
+    console.log("These are previous states", preState);
+  }
+  // USE IF WANT TO STOP RE-RENDERING OF COMPONENT AT CERTAIN CONDITION.
+  shouldComponentUpdate() {
+    console.log("shouldComponentUpdate lifecycle");
+    // return false;  // UPDATE THE STATE BUT RENDER WILL NOT EXECUTE
+    return true; // UPDATE THE STATE BUT RENDER WILL EXECUTE
+  }
+  // CALLS WHEN COMPONENT WILL DESTROY
+  componentWillUnmount() {
+    console.log("componentWillUnmount lifecycle");
+  }
   render() {
+    console.log("Render lifecycle");
+    console.log("Props", this.props);
     return (
       <>
         <Container>
@@ -24,7 +47,7 @@ class Signup extends Component {
             </Col>
             <Col md={6}>
               <Form className="mb-4">
-                <Form.Group className="mb-4" controlId="formBasicEmail">
+                <Form.Group className="mb-4" controlId="formBasicName1">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="email"
@@ -36,7 +59,7 @@ class Signup extends Component {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-4" controlId="formBasicEmail">
+                <Form.Group className="mb-4" controlId="formBasicEmail1">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
@@ -51,7 +74,7 @@ class Signup extends Component {
                   </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3" controlId="formBasicPassword1">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
