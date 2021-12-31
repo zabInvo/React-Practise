@@ -1,33 +1,47 @@
 import { Form, Button, Container, Row, Col, Badge } from "react-bootstrap";
 import logo from "../logo.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+import authContext from "../context/authContext";
+
 
 function Login() {
   const [email, setEmail] = useState("zain.ali@invozone.com");
   const [password, setPassword] = useState("");
 
+  // DEFINE CONTEXT OF USER
+  const user = useContext(authContext);
+
+  const router = useNavigate();
   // USE STATE CAN BE USED LIKE THIS
   function onChange(e) {
     // setPassword(e.target.value + "SomeThing");
-   
-    // TO CHECK PREVIOUS VALUE OF STATE USE THIS CALL BACK SYNTAX 
-    setPassword((pre)=>{
+
+    // TO CHECK PREVIOUS VALUE OF STATE USE THIS CALL BACK SYNTAX
+    setPassword((pre) => {
       console.log("This is Previous Value", pre);
-      return e.target.value
-    })
+      return e.target.value;
+    });
   }
 
   // USE EFFECTS
   useEffect(() => {
     console.log("useEffect Is Working");
+    // TESTING CONTEXT API FUNCTIONS METHOD
+    if (user.state.isLoggedIn == true) {
+      user.removeAuthUser();
+    }
   });
   // IF YOU WANT TO USE useState INSIDE useEffect SOME CONDITION MUST BE APPLIED FOR PREVENTING INFINITE LOOP
   // USE EFFECTS ON SPECIFIC STATE
   useEffect(() => {
     console.log("Email useEffect Is Working");
   }, [email]);
+
   // CONDIONTAL RENDERING IF ELSE
-  if (email == "zain.ali@invozone.com") {
+  if (email === "zain.ali@invozone.com") {
     return (
       <>
         <Container>
@@ -79,7 +93,18 @@ function Login() {
   function loginUser() {
     console.log("this is email", email);
     console.log("this is password", password);
-    alert("User Login Successfully");
+
+
+      user.setUser({
+        isLoggedIn : true,
+        name : 'Zain Ali Bokhari',
+        email : email
+      });
+
+    // UPDATE CONTEXT OF AuthUser
+    
+    alert("User Logged In Successfully! ");
+    router('/employees');
   }
 }
 
