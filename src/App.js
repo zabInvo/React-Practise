@@ -6,6 +6,8 @@ import Company from "./components/company";
 import Employee from "./components/employee";
 import EmployeeDetails from "./components/employeesDetails";
 import PageNotFound from "./components/pageNotFound";
+
+// CONTEXT API IMPORT FOR GLOBAL USE 
 import AuthState from "./context/authStates";
 
 import { Routes, Route } from "react-router-dom";

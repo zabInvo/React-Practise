@@ -30,7 +30,7 @@ function Login() {
   useEffect(() => {
     console.log("useEffect Is Working");
     // TESTING CONTEXT API FUNCTIONS METHOD
-    if (user.state.isLoggedIn == true) {
+    if (user.state.isLoggedIn === true) {
       console.log("Remove User By useEffect");
       user.removeAuthUser();
     }
