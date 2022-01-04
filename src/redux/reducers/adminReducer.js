@@ -1,20 +1,18 @@
-const initialState = {
+import { createReducer } from "@reduxjs/toolkit";
+
+const initalState = {
   companies: [],
 };
 
-const companyReducers = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case "FETCH_COMPANIES":
-      return { ...state, companies: payload };
-    case "DELETE_COMPANY":
-      const deleteCompany = state.companies.filter((item) => {
-        return item.id !== payload.id;
-      });
-      state.companies = deleteCompany;
-      return { ...state };
-    default:
-      return state;
-  }
-};
+const adminReducer = createReducer(initalState, (builder) => {
+  builder.addCase("FETCH_COMPANIES_SUCCESS", (state, action) => {
+    state.companies = action.payload;
+  });
+  builder.addCase("DELETE_COMPANY_SUCCESS", (state, action) => {
+    state.companies = state.companies.filter((item) => {
+      return item.id !== action.payload.id;
+    });
+  });
+});
 
-export { companyReducers };
+export default adminReducer;

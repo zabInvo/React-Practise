@@ -1,6 +1,7 @@
-import { applyMiddleware, createStore, compose } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
 import reducers from "./reducers/index";
-import thunk from "redux-thunk";
+import rootSaga from "./actions/index";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
@@ -12,14 +13,13 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-const composedEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  persistedReducer,
-  composedEnhancers(applyMiddleware(thunk))
-);
-
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [sagaMiddleware],
+});
 const persistor = persistStore(store);
+sagaMiddleware.run(rootSaga);
 
 export { store, persistor };

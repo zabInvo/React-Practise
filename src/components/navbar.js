@@ -11,7 +11,7 @@ function NavBar(props) {
   // DEFINE CONTEXT OF USER
   const user = useContext(authContext);
 
-  if (user.state.isLoggedIn === true) {
+  if (user.state.isLoggedIn === true || user.state.isLoggedIn === false) {
     return (
       <Navbar bg="dark" variant="dark" className="d-flex">
         <Container>

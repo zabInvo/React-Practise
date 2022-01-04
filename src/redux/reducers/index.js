@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import { companyReducers } from "./adminReducer";
+import adminReducer from "./adminReducer";
+import userReducer from "./userReducerNewMethod";
 
 const reducer = combineReducers({
-  companyReducers: companyReducers,
+  adminReducer: adminReducer,
+  userReducer: userReducer,
 });
 
 export default reducer;

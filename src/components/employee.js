@@ -1,38 +1,43 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
 
 function Employee() {
-  const employee = [
-    {
-      name: "Zain",
-      image: "https://avatars.githubusercontent.com/u/26528142?v=4",
-    },
-    {
-      name: "Ali",
-      image: "https://avatars.githubusercontent.com/u/26528142?v=4",
-    },
-    {
-      name: "Bokhari",
-      image: "https://avatars.githubusercontent.com/u/26528142?v=4",
-    },
-  ];
+  const dispatch = useDispatch();
 
+  // DELETE COMPANY FUNCTION
+  const deleteUserById = (id) => {
+    dispatch({ type: "DELETE_USER_REQUEST", id });
+  };
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_USERS_REQUEST", companyId: 18 });
+  }, []);
+
+  const users = useSelector((state) => state.userReducer.users);
+
+  const renderList = users.map((item) => {
+    return (
+      <div key={item.id}>
+        <Card style={{ width: "18rem" }} className="m-2">
+          <Card.Body>
+            <Card.Title>{item.name}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              {item.email}
+            </Card.Subtitle>
+            <Card.Text>{item.type}</Card.Text>
+            <Button variant="danger" onClick={() => deleteUserById(item.id)}>
+              Delete
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  });
   return (
-    // DYNAMIC ROUTING
-    <div className="d-flex">
-      {employee.map((item,index) => {
-        return (
-          <Card key={index} style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={item.image} />
-            <Card.Body>
-              <Card.Title>{item.name}</Card.Title>
-              <Button variant=""><Link to={"/employees/details/" + item.name }>Check Details</Link></Button>
-            </Card.Body>
-          </Card>
-        );
-      })}
-    </div>
+    <>
+      <div className="d-flex mt-2 mr-2">{renderList}</div>
+    </>
   );
 }
 

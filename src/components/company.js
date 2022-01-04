@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanies, deleteCompany } from "../redux/actions/adminActions";
 import { Card, Button } from "react-bootstrap";
 
 function Company() {
@@ -8,14 +7,15 @@ function Company() {
 
   // DELETE COMPANY FUNCTION
   const deleteCompanyById = (id) => {
-    dispatch(deleteCompany(id));
+    dispatch({ type: "DELETE_COMPANY_REQUEST", id });
   };
+
   useEffect(() => {
-    dispatch(fetchCompanies());
+    dispatch({ type: "FETCH_COMPANIES_REQUEST" });
   }, []);
 
-  const company = useSelector((state) => state.companyReducers.companies);
-  console.log("This is use Selector", company);
+  const company = useSelector((state) => state.adminReducer.companies);
+
   const renderList = company.map((item) => {
     return (
       <div key={item.id}>
