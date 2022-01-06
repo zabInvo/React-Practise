@@ -4,7 +4,7 @@ import { GET_USERS, DELETE_USERS } from "../reducers/userReducerNewMethod";
 import service from "../../services/axiosService";
 
 let token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxMjk0MzEyLCJleHAiOjE2NDEzMzc1MTJ9.YtcvbSge7BwCCAh3LnauZjkDa69Ggo2-Sj6O65m4iUo";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxMzY3Mjg5LCJleHAiOjE2NDE0MTA0ODl9.X0IZ3Aq7ksZ9fPgytKmBVeVPUiEApBtv_tUgInYS3G8";
 
 const fetchUsersApi = async (id) => {
   try {

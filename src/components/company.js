@@ -14,7 +14,7 @@ function Company() {
     dispatch({ type: "FETCH_COMPANIES_REQUEST" });
   }, []);
 
-  const company = useSelector((state) => state.adminReducer.companies);
+  const company = useSelector((state) => state.adminReducer.companies ? state.adminReducer.companies : []);
 
   const renderList = company.map((item) => {
     return (

@@ -14,7 +14,7 @@ function Employee() {
     dispatch({ type: "FETCH_USERS_REQUEST", companyId: 18 });
   }, []);
 
-  const users = useSelector((state) => state.userReducer.users);
+  const users = useSelector((state) => state.userReducer.users ? state.userReducer.users : []);
 
   const renderList = users.map((item) => {
     return (
